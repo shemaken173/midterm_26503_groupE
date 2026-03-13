@@ -1,0 +1,842 @@
+{
+	"info": {
+		"_postman_id": "pharmacy-api-collection-2026",
+		"name": "Pharmacy Supply Management System API",
+		"description": "Complete API collection for Pharmacy Supply Management System\n\nStudent: Shema Ken\nStudent ID: 26503\nGroup: E\nUniversity: AUCA\n\nBase URL: http://localhost:8080/api/pharmacy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User with Location Hierarchy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Shema Ken\",\n  \"email\": \"shema.ken@auca.ac.rw\",\n  \"location\": {\n    \"name\": \"Nyagatovu Village\",\n    \"code\": \"NYG\",\n    \"type\": \"VILLAGE\",\n    \"parent\": {\n      \"name\": \"Bibare Cell\",\n      \"code\": \"BIB\",\n      \"type\": \"CELL\",\n      \"parent\": {\n        \"name\": \"Kimironko Sector\",\n        \"code\": \"KIM\",\n        \"type\": \"SECTOR\",\n        \"parent\": {\n          \"name\": \"Gasabo District\",\n          \"code\": \"GAS\",\n          \"type\": \"DISTRICT\",\n          \"parent\": {\n            \"name\": \"Kigali City\",\n            \"code\": \"KGL\",\n            \"type\": \"PROVINCE\"\n          }\n        }\n      }\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"users"
+							]
+						},
+						"description": "Creates a new user with complete location hierarchy (Cascade Save)"
+					},
+					"response": []
+				},
+				{
+					"name": "Check User Exists by Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/users/exists?email=shema.ken@auca.ac.rw",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"users",
+								"exists"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "shema.ken@auca.ac.rw"
+								}
+							]
+						},
+						"description": "Checks if a user exists by email (Derived Query Method)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users by Province Code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/users/province?code=KC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"users",
+								"province"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "KC"
+								}
+							]
+						},
+						"description": "Gets all users in a province by province code (4-level JOIN query)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users by Province Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/users/province?name=Kigali City",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"users",
+								"province"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Kigali City"
+								}
+							]
+						},
+						"description": "Gets all users in a province by province name"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Shema Ken Updated\",\n  \"email\": \"shema.ken.updated@auca.ac.rw\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"users",
+								"1"
+							]
+						},
+						"description": "Updates an existing user"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"users",
+								"1"
+							]
+						},
+						"description": "Deletes a user by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Drugs",
+			"item": [
+				{
+					"name": "Create Drug",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Amoxicillin 500mg\",\n  \"price\": 15.99,\n  \"category\": {\n    \"id\": 1\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/drugs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"drugs"
+							]
+						},
+						"description": "Creates a new drug with category (Many-to-One)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Drugs with Pagination and Sorting",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/drugs?page=0&size=5&sortBy=name",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"drugs"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "sortBy",
+									"value": "name"
+								}
+							]
+						},
+						"description": "Gets drugs with pagination and sorting"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Drugs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/drugs/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"drugs",
+								"all"
+							]
+						},
+						"description": "Gets all drugs without pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Drug by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/drugs/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"drugs",
+								"1"
+							]
+						},
+						"description": "Gets a specific drug by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Drug",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Amoxicillin 750mg\",\n  \"price\": 19.99,\n  \"category\": {\n    \"id\": 1\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/drugs/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"drugs",
+								"1"
+							]
+						},
+						"description": "Updates an existing drug"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Drug",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/drugs/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"drugs",
+								"1"
+							]
+						},
+						"description": "Deletes a drug by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Antibiotics\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"categories"
+							]
+						},
+						"description": "Creates a new category"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"categories"
+							]
+						},
+						"description": "Gets all categories"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"categories",
+								"1"
+							]
+						},
+						"description": "Gets a specific category by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Drugs by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/categories/1/drugs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"categories",
+								"1",
+								"drugs"
+							]
+						},
+						"description": "Gets all drugs in a specific category (One-to-Many)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Antibiotics Updated\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"categories",
+								"1"
+							]
+						},
+						"description": "Updates an existing category"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"categories",
+								"1"
+							]
+						},
+						"description": "Deletes a category by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Suppliers",
+			"item": [
+				{
+					"name": "Create Supplier",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"PharmaCorp International\",\n  \"contactEmail\": \"info@pharmacorp.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"suppliers"
+							]
+						},
+						"description": "Creates a new supplier"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Suppliers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"suppliers"
+							]
+						},
+						"description": "Gets all suppliers"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Supplier by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/suppliers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"suppliers",
+								"1"
+							]
+						},
+						"description": "Gets a specific supplier by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Drugs by Supplier",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/suppliers/1/drugs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"suppliers",
+								"1",
+								"drugs"
+							]
+						},
+						"description": "Gets all drugs supplied by a specific supplier (Many-to-Many)"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Drug to Supplier",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/suppliers/1/drugs/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"suppliers",
+								"1",
+								"drugs",
+								"1"
+							]
+						},
+						"description": "Adds a drug to a supplier (Many-to-Many relationship)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Supplier",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"PharmaCorp International Updated\",\n  \"contactEmail\": \"contact@pharmacorp.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/suppliers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"suppliers",
+								"1"
+							]
+						},
+						"description": "Updates an existing supplier"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Supplier",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/suppliers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"suppliers",
+								"1"
+							]
+						},
+						"description": "Deletes a supplier by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Locations",
+			"item": [
+				{
+					"name": "Create Location",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Kigali City\",\n  \"code\": \"KC\",\n  \"type\": \"PROVINCE\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/locations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"locations"
+							]
+						},
+						"description": "Creates a new location"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Locations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/locations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"locations"
+							]
+						},
+						"description": "Gets all locations (hierarchical structure)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/locations/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"locations",
+								"1"
+							]
+						},
+						"description": "Gets a specific location by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Location",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Kigali City Updated\",\n  \"code\": \"KC-UPD\",\n  \"type\": \"PROVINCE\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/locations/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"locations",
+								"1"
+							]
+						},
+						"description": "Updates an existing location"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Location",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pharmacy/locations/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pharmacy",
+								"locations",
+								"1"
+							]
+						},
+						"description": "Deletes a location by ID"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
