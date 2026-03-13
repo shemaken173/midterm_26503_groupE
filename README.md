@@ -354,24 +354,6 @@ For more examples, see the [API Testing Guide](API_TESTING_GUIDE.md).
 
 ---
 
-## Assessment Coverage (30 Marks)
-
-| # | Requirement | Implementation | Marks | Status |
-|---|------------|----------------|-------|--------|
-| 1 | ERD with 5 tables | User, Location, Drug, Category, Supplier | 3 | Complete |
-| 2 | Cascade Save | CascadeType.ALL on Location | 2 | Complete |
-| 3 | Sorting & Pagination | Pageable interface | 5 | Complete |
-| 4 | Many-to-Many | Supplier ↔ Drug | 3 | Complete |
-| 5 | One-to-Many | Category → Drug | 2 | Complete |
-| 6 | One-to-One | User ↔ Location | 2 | Complete |
-| 7 | existBy() method | existsByEmail() | 2 | Complete |
-| 8 | Province Query | 4-level JOIN query | 4 | Complete |
-| 9 | Viva-Voce | Theory explanations | 7 | Ready |
-
-**Total: 30/30 Marks**
-
----
-
 ## Key Implementations
 
 ### 1. Adjacency List Model (Location Hierarchy)
